@@ -6,17 +6,33 @@ export default function HomeScreen() {
   
   const [number, setInputValue] = React.useState('');
   const [bin, setBin] = React.useState('');
+  const [dec, setDec] = React.useState('');
 
   function handleChange(text: string) {
     setInputValue(text);
 
-    const parsed = parseInt(text, 10);
-    if (!isNaN(parsed)) {
-      setBin(parsed.toString(2));
+    const parsedBin = parseInt(text, 10);
+   if (!isNaN(parsedBin)) {//Conferindo é um número
+      setBin(parsedBin.toString(2));
     } else {
       setBin('');
     }
+
+    // numero.toString();       // "10" (por padrão, base 10)
+    // numero.toString(2);      // "1010" (binário)
+    // numero.toString(8);      // "12"   (octal)
+    // numero.toString(16);     // "a"    (hexadecimal)
+
+    const parsedDec = parseInt(text, 2);
+    if (!isNaN(parsedDec)) {//Conferindo é um número
+      setDec(parsedDec.toString());
+    } else {
+      setDec('');
+    }
+
   }
+
+    
   
   return (
     <View style={styles.container}>
@@ -32,7 +48,14 @@ export default function HomeScreen() {
         value={bin}
         editable={false}
         style={styles.input}
+        placeholder='Binário'
         ></TextInput>
+        <TextInput
+        value={dec}
+        editable={false}
+        style={styles.input}
+        placeholder='Decimal'>
+        </TextInput>
     </View>
 
 )
@@ -73,5 +96,6 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 20,
     marginTop: 20,
+    textAlign: 'center',
   }
 })
