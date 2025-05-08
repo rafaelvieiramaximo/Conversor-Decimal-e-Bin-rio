@@ -2,27 +2,21 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 
-
-
 export default function HomeScreen() {
   
   const [number, setInputValue] = React.useState('');
   const [bin, setBin] = React.useState('');
 
-  function convertBinary(number: string) {
+  function handleChange(text: string) {
+    setInputValue(text);
 
-    let numbers = parseInt(number);
-    let bin = 0;
-    let rem, i = 1;
-    while (numbers !== 0) {
-      rem = numbers % 2;
-      numbers = Math.floor(numbers / 2);
-      bin = bin + rem * i;
-      i = i * 10;
+    const parsed = parseInt(text, 10);
+    if (!isNaN(parsed)) {
+      setBin(parsed.toString(2));
+    } else {
+      setBin('');
     }
-    return bin;
   }
-
   
   return (
     <View style={styles.container}>
@@ -32,12 +26,11 @@ export default function HomeScreen() {
         keyboardType='numeric'
         placeholder='Digite a ser convertido'
         style={styles.inputenter}
-        value={number}
-        onChangeText={convertBinary}
+        onChangeText={handleChange}
         ></TextInput>
         <TextInput
-        onChangeText={(number) => convertBinary(number)}
         value={bin}
+        editable={false}
         style={styles.input}
         ></TextInput>
     </View>
