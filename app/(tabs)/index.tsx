@@ -56,6 +56,25 @@ export default function HomeScreen() {
         style={styles.input}
         placeholder='Decimal'>
         </TextInput>
+        <View style={{flexDirection: 'row', gap: 20, marginTop: 60}}>
+        <View><Text>128</Text></View>
+        <View><Text>|</Text></View>
+        <View><Text>64</Text></View>
+        <View><Text>|</Text></View>
+        <View><Text>32</Text></View>
+        <View><Text>|</Text></View>
+        <View><Text>16</Text></View>
+        <View><Text>|</Text></View>
+        <View><Text>8</Text></View>
+        <View><Text>|</Text></View>
+        <View><Text>4</Text></View>
+        <View><Text>|</Text></View>
+        <View><Text>2</Text></View>
+        <View><Text>|</Text></View>
+        <View><Text>1</Text></View>
+        </View>
+        
+
     </View>
 
 )
