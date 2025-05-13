@@ -2,96 +2,106 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function HomeScreen() {
-  
   const [number, setInputValue] = React.useState('');
   const [bin, setBin] = React.useState('');
   const [dec, setDec] = React.useState('');
+  const [binArray, setBinArray] = React.useState<string[]>([]);
 
   function handleChange(text: string) {
     setInputValue(text);
 
-    const parsedBin = parseInt(text, 10);
-   if (!isNaN(parsedBin)) {//Conferindo é um número
-      setBin(parsedBin.toString(2));
-    } else {
+    if(text === ''){
       setBin('');
+      setDec('');
+      setBinArray([]);
     }
 
-    // numero.toString();       // "10" (por padrão, base 10)
-    // numero.toString(2);      // "1010" (binário)
-    // numero.toString(8);      // "12"   (octal)
-    // numero.toString(16);     // "a"    (hexadecimal)
+    const parsedBin = parseInt(text, 10);
+    if (!isNaN(parsedBin)) {
+      const binaryString = parsedBin.toString(2);
+      setBin(parsedBin.toString(2));
+      setBinArray(binaryString.split(''));
+    } else {
+      setBin('');
+      setBinArray([]);
+    }
+
+  
 
     const parsedDec = parseInt(text, 2);
-    if (!isNaN(parsedDec)) {//Conferindo é um número
+    if (!isNaN(parsedDec)) {
       setDec(parsedDec.toString());
     } else {
       setDec('');
     }
-
   }
 
-    
-  
   return (
-    <View style={styles.container}>
-      <Text style ={styles.title}>Conversor</Text>
-      <Text style={styles.subtitle}>Insira o número aqui:</Text>
-      <TextInput 
-        keyboardType='numeric'
-        placeholder='Digite a ser convertido'
-        style={styles.inputenter}
-        onChangeText={handleChange}
-        ></TextInput>
-        <TextInput
-        value={bin}
-        editable={false}
-        style={styles.input}
-        placeholder='Binário'
-        ></TextInput>
-        <TextInput
-        value={dec}
-        editable={false}
-        style={styles.input}
-        placeholder='Decimal'>
-        </TextInput>
-        <View style={{flexDirection: 'row', marginTop: 60}}>
-      
-        <View style={styles.tableview}><Text style={styles.texttable}>128</Text></View>
-        <View style={styles.tableview}><Text style={styles.texttable}>64</Text></View>
-        <View style={styles.tableview}><Text style={styles.texttable}>32</Text></View>
-        <View style={styles.tableview}><Text style={styles.texttable}>16</Text></View>
-        <View style={styles.tableview}><Text style={styles.texttable}>8</Text></View>
-        <View style={styles.tableview}><Text style={styles.texttable}>4</Text></View>
-        <View style={styles.tableview}><Text style={styles.texttable}>2</Text></View>
-        <View style={styles.tableview}><Text style={styles.texttable}>1</Text></View>
+      <View style={styles.container}>
+        <View style={{ gap: 30 }}>
+          <Text style={styles.title}>Conversor</Text>
+          <Text style={styles.subtitle}>Insira o número aqui:</Text>
+          <TextInput
+            keyboardType="numeric"
+            placeholder="Digite aqui"
+            style={styles.inputenter}
+            onChangeText={handleChange}
+          ></TextInput>
+          <TextInput
+            value={bin}
+            editable={false}
+            style={styles.input}
+            placeholder="Binário"
+          ></TextInput>
+          <TextInput
+            value={dec}
+            editable={false}
+            style={styles.input}
+            placeholder="Decimal"
+          ></TextInput>
         </View>
         <View>
-          
+          <View style={{ flexDirection: 'row', marginTop: 60, justifyContent: 'flex-end' }}>
+            <View style={styles.tableview}><Text style={styles.texttable}>128</Text></View>
+            <View style={styles.tableview}><Text style={styles.texttable}>64</Text></View>
+            <View style={styles.tableview}><Text style={styles.texttable}>32</Text></View>
+            <View style={styles.tableview}><Text style={styles.texttable}>16</Text></View>
+            <View style={styles.tableview}><Text style={styles.texttable}>8</Text></View>
+            <View style={styles.tableview}><Text style={styles.texttable}>4</Text></View>
+            <View style={styles.tableview}><Text style={styles.texttable}>2</Text></View>
+            <View style={styles.tableview}><Text style={styles.texttable}>1</Text></View>
+          </View>
+
+          <View>
+            <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
+              {binArray.map((digit, index) => (
+                <View key={index} style={styles.tableview}>
+                  <Text style={styles.texttable}>{digit}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
         </View>
-        
+      </View>
+  );
+}
 
-    </View>
-
-)
-
-} 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
     flex: 1,
-    flexDirection: 'column',
     alignItems: 'center',
-    gap: 30,
+
+    backgroundColor: '#fff',
   },
   title: {
     fontSize: 40,
     marginTop: 50,
+    justifyContent: 'center',
   },
   subtitle: {
     fontSize: 20,
   },
-  inputenter:{
+  inputenter: {
     width: 300,
     height: 50,
     borderWidth: 1,
@@ -102,7 +112,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: 'center',
   },
-  input:{
+  input: {
     width: 300,
     height: 50,
     borderWidth: 1,
@@ -113,11 +123,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: 'center',
   },
-  tableview:{
+  tableview: {
     borderWidth: 1,
-    padding: 10,
+    width: 50,
+    height: 50,
   },
-  texttable:{
-    fontSize:20
-  }
-})
+  texttable: {
+    fontSize: 20,
+    textAlign: 'center',
+    paddingTop: 12,
+  },
+});
