@@ -15,7 +15,6 @@ export default function HomeScreen() {
       setDec('');
       setBinArray([]);
     }
-
     const parsedBin = parseInt(text, 10);
     if (!isNaN(parsedBin)) {
       const binaryString = parsedBin.toString(2);
@@ -25,8 +24,6 @@ export default function HomeScreen() {
       setBin('');
       setBinArray([]);
     }
-
-  
 
     const parsedDec = parseInt(text, 2);
     if (!isNaN(parsedDec)) {
