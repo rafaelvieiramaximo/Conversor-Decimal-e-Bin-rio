@@ -17,7 +17,7 @@ export default function HomeScreen() {
     }
     const parsedBin = parseInt(text, 10);
     if (!isNaN(parsedBin)) {
-      const binaryString = parsedBin.toString(2);
+      const binaryString = parsedBin.toString(2).padStart(8, '0');
       setBin(parsedBin.toString(2));
       setBinArray(binaryString.split(''));
     } else {
