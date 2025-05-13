@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
-
 export default function HomeScreen() {
   
   const [number, setInputValue] = React.useState('');
@@ -56,22 +55,19 @@ export default function HomeScreen() {
         style={styles.input}
         placeholder='Decimal'>
         </TextInput>
-        <View style={{flexDirection: 'row', gap: 20, marginTop: 60}}>
-        <View><Text>128</Text></View>
-        <View><Text>|</Text></View>
-        <View><Text>64</Text></View>
-        <View><Text>|</Text></View>
-        <View><Text>32</Text></View>
-        <View><Text>|</Text></View>
-        <View><Text>16</Text></View>
-        <View><Text>|</Text></View>
-        <View><Text>8</Text></View>
-        <View><Text>|</Text></View>
-        <View><Text>4</Text></View>
-        <View><Text>|</Text></View>
-        <View><Text>2</Text></View>
-        <View><Text>|</Text></View>
-        <View><Text>1</Text></View>
+        <View style={{flexDirection: 'row', marginTop: 60}}>
+      
+        <View style={styles.tableview}><Text style={styles.texttable}>128</Text></View>
+        <View style={styles.tableview}><Text style={styles.texttable}>64</Text></View>
+        <View style={styles.tableview}><Text style={styles.texttable}>32</Text></View>
+        <View style={styles.tableview}><Text style={styles.texttable}>16</Text></View>
+        <View style={styles.tableview}><Text style={styles.texttable}>8</Text></View>
+        <View style={styles.tableview}><Text style={styles.texttable}>4</Text></View>
+        <View style={styles.tableview}><Text style={styles.texttable}>2</Text></View>
+        <View style={styles.tableview}><Text style={styles.texttable}>1</Text></View>
+        </View>
+        <View>
+          
         </View>
         
 
@@ -116,5 +112,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 20,
     textAlign: 'center',
+  },
+  tableview:{
+    borderWidth: 1,
+    padding: 10,
+  },
+  texttable:{
+    fontSize:20
   }
 })
